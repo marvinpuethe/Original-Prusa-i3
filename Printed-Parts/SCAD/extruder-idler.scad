@@ -40,7 +40,7 @@ module idler()
         translate([11.5,-5,-25]) cylinder(h = 40, r=1.7, $fn=60); 
         
         // bondtech shaft
-        translate([4,-20.5,-25]) cylinder(h = 40, r=1.5, $fn=60);
+        translate([4,-20.5,-25]) cylinder(h = 40, r=2.5, $fn=60);
         
         // bontech space
         translate([4,-20.5,-11.2]) cylinder(h = 14.4, r=5, $fn=60);
