@@ -8,20 +8,21 @@
 use <bearing.scad>
 use <polyholes.scad>
 rod_distance = 45;
+nut_radius = 8.0;
 
 module x_end_base()
 {
-    
-    
-    
+
+
+
     // Main block
     height = 58;
     translate(v=[-15,-9,height/2]) cube(size = [17,39,height], center = true);
     translate([-8,-28.5,0]) cube(size = [5,1,13.5]);
-    
+
     // Bearing holder
-    vertical_bearing_base();	
-    
+    vertical_bearing_base();
+
     //Nut trap
     // Cylinder
     translate(v=[0,-17,0]) cylinder(h = 13.5, r=12.5, $fn=100);
@@ -32,22 +33,22 @@ module x_end_base()
         translate(v=[8,-24,12]) rotate([0,0,0]) cube(size = [50,15,10], center = true);
         translate(v=[0,-17, -1]) cylinder(h = 20, r = 6.7, $fn = 60);
     }
-    
-    
 
-    
-    
-    
-    
+
+
+
+
+
+
 }
 module reinforcement_selective_infill()
 {
-    rotate([90,0,-15,]) translate ([-1.5, 8, 26])linear_extrude(height = 0.2) polygon( points=[[-2,0],[0,5],[8,0]] ); 
-    rotate([90,0,-50,]) translate ([8.5, 8, 1.4])linear_extrude(height = 0.2) polygon( points=[[0,0],[0,5],[12,0]] ); 
+    rotate([90,0,-15,]) translate ([-1.5, 8, 26])linear_extrude(height = 0.2) polygon( points=[[-2,0],[0,5],[8,0]] );
+    rotate([90,0,-50,]) translate ([8.5, 8, 1.4])linear_extrude(height = 0.2) polygon( points=[[0,0],[0,5],[12,0]] );
 }
-    
-   
-    
+
+
+
 module x_end_holes()
 {
     vertical_bearing_holes();
@@ -58,7 +59,7 @@ module x_end_holes()
         translate(v=[-5.5-10+1.5,-10-1,30]) cube(size = [18,1,28], center = true);
         difference()
         {
-        
+
         translate(v=[-5.5-10+1.5,-10,30]) cube(size = [10,46,28], center = true);
 
         // Nice edges
@@ -80,33 +81,36 @@ module x_end_holes()
 // TR Nut trap
    // Hole for the nut
     //#translate(v=[0,-17, -1]) poly_cylinder(h = 9.01, r = 6.7, $fn = 60);
-    translate(v=[0,-17, -1]) cylinder(h = 14.51, r = 6.7, $fn = 60);
-    translate(v=[0,-17, -0.1]) cylinder(h = 1, r1 = 7.2,r2 = 6.7, $fn = 60);
+    translate(v=[0,-17, -1]) cylinder(h = 14.51, r = 5.0, $fn = 60);
+    translate(v=[0,-17, -0.1]) cylinder(h = 1, r1 = 5.5,r2 = 6.7, $fn = 60);
 
 // Screw holes for TR nut
-   
-   
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, -4]) cylinder(h = 19, r = 1.65, $fn=50);
-    
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -9.5, -4]) cylinder(h = 19, r = 1.65, $fn=50);
-        
-    
-  
-    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,9.5,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
-    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,-9.5,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
+
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, nut_radius, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, -nut_radius, -4]) cylinder(h = 19, r = 1.65, $fn=50);
+
+
+
+    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,nut_radius,-1]) cylinder(h=2, r1=2.2,r2=1.65, $fn=50);
+    translate(v=[0,-17,0]) rotate([0,0,-135]) translate([0,-nut_radius,-1]) cylinder(h=2, r1=2.2,r2=1.65,, $fn=50);
 
 
 // Nut traps for TR nut screws
-    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, 9.5, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
+    translate(v=[0,-17, 0]) rotate([0, 0, -135]) translate([0, nut_radius, 11]) rotate([0, 0, 0])cylinder(h = 6, r = 3.1, $fn=6);
 
-    translate(v=[0,-17, 0]) rotate([0,0,-135]) translate([0,-9.5,10]) rotate([0,0,30])cylinder(h = 4, r = 3.2, $fn=6);
-    translate([-5.5,-17.2,10]) rotate([0,0,32]) cube([5,5.9,3.5]);
-    translate([-0,-17.2,10]) rotate([0,0,58]) cube([5,10,3.5]);
-    
-   
-    
-   
-    
+    translate(v=[0,-17, 0]) rotate([0,0,-135]) translate([0,-nut_radius,10]) rotate([0,0,30])cylinder(h = 4, r = 3.2, $fn=6);
+
+    nut_difference = 9.5 - nut_radius; // nut_radius was 9.5
+    delta = sqrt((nut_difference * nut_difference) / 2);
+
+    translate(v=[0,-17,0]) translate([-5.6+delta,-0.2-delta,10]) rotate([0,0,32]) cube([5,5.9,3.5]);
+    translate(v=[0,-17,0]) translate([0+delta,-0.2-delta,10]) rotate([0,0,58]) cube([5,10,3.5]);
+
+
+
+
+
 }
 
 
@@ -122,13 +126,13 @@ module x_end_plain()
             x_end_base();
             x_end_holes();
         }
-       
+
     }
 
     }
-    
-   
-    
+
+
+
 
 }
 
@@ -145,6 +149,6 @@ module pushfit_rod(diameter,length)
 }
 difference () {
 x_end_plain();
-  //translate([-50,-50,-1]) rotate([0,0,0]) cube([100,100,5]);  
+  //translate([-50,-50,-1]) rotate([0,0,0]) cube([100,100,5]);
 }
-//    
+//

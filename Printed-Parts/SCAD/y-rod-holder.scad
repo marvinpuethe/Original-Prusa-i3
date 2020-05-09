@@ -19,6 +19,7 @@ module ziptie_round_edge()
 
 module part()    
 {
+    height_advance = 1.0;
 
     difference()
     {
@@ -26,7 +27,7 @@ module part()
         {
             // body block
             difference() {
-                translate([-13,-3,0]) cube([26,10,12]);
+                translate([-13,-3,0]) cube([26,10,12 + height_advance]);
                 
                 // upper corners
                 translate([4,-3.5,20]) rotate([0,60,0]) cube([20,30,20]);
@@ -44,11 +45,11 @@ module part()
         }
 
         // y-axis cut
-        translate([0,11,10.5]) rotate([90,0,0]) cylinder( h=14, r=4, $fn=50 );
-       translate([0,8,10.5]) rotate([90,0,0]) cylinder( h=2, r1=4.5, r2=4, $fn=50 );
-        translate([0,-2,10.5]) rotate([90,0,0]) cylinder( h=2, r1=4, r2=4.5, $fn=50 );
-        translate([-7,-4,14.5]) rotate([0,45,0]) cube([10,20,10]);
-        translate([0,8,10.5]) rotate([90,0,0]) cylinder( h=1.4, r1=5, r2=4, $fn=50 );
+        translate([0,11,10.5 + height_advance]) rotate([90,0,0]) cylinder( h=14, r=4, $fn=50 );
+        translate([0,8,10.5 + height_advance]) rotate([90,0,0]) cylinder( h=2, r1=4.5, r2=4, $fn=50 );
+        translate([0,-2,10.5 + height_advance]) rotate([90,0,0]) cylinder( h=2, r1=4, r2=4.5, $fn=50 );
+        translate([-7,-4,14.5 + height_advance]) rotate([0,45,0]) cube([10,20,10]);
+        translate([0,8,10.5 + height_advance]) rotate([90,0,0]) cylinder( h=1.4, r1=5, r2=4, $fn=50 );
 
         // screw holes
         translate([-5.5,4,3.5]) rotate([90,0,0]) cylinder( h=20, r=1.55, $fn=60 );

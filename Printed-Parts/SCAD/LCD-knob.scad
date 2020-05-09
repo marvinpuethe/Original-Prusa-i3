@@ -14,9 +14,9 @@ translate([0,0,0]) rotate(a=[0,0,0]) cylinder(h = 7.5, r1=10, r=7.25, $fn=60);
 translate([0,0,20]) rotate(a=[0,0,0]) sphere(14);
 
 // knob cutout
-translate([0,0,-0.1]) rotate(a=[0,0,0]) cylinder(h = 4.6, d=6.1, $fn=60);
+translate([0,0,-0.1]) rotate(a=[0,0,0]) cylinder(h = 4.6, d=5.9, $fn=60);
     
-translate([0,0,-0.1]) rotate(a=[0,0,0]) cylinder(h = 0.6, d1=7.1, d2=6.1 , $fn=30); 
+translate([0,0,-0.1]) rotate(a=[0,0,0]) cylinder(h = 0.6, d1=6.9, d2=6.1 , $fn=30); 
     
 translate([0,0.75,-0.1]) rotate(a=[0,0,-90]) cube([1.5,5.3,4.6]);
 
